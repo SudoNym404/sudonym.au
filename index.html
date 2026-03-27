@@ -163,12 +163,17 @@
       background: rgba(255, 255, 255, 0.08);
     }
 
-    .hero-card {
+    .hero-card,
+    .card,
+    .contact-box {
       background: var(--card);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
-      padding: 26px;
       box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 26px;
     }
 
     .stats {
@@ -186,7 +191,7 @@
 
     .stat h3 {
       margin: 0 0 6px;
-      font-size: 1.7rem;
+      font-size: 1.2rem;
       color: var(--accent-2);
     }
 
@@ -218,23 +223,44 @@
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
       padding: 22px;
-      box-shadow: var(--shadow);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(110, 168, 254, 0.35);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      background: rgba(110, 168, 254, 0.12);
+      border: 1px solid rgba(110, 168, 254, 0.22);
+      font-size: 1.35rem;
     }
 
     .card h3 {
-      margin-top: 0;
-      margin-bottom: 10px;
+      margin: 0 0 10px;
       font-size: 1.15rem;
     }
 
     .card p {
-      margin: 0;
+      margin: 0 0 16px;
       color: var(--muted);
       font-size: 0.97rem;
+    }
+
+    .card-link {
+      font-size: 0.92rem;
+      color: var(--accent);
+      font-weight: 700;
     }
 
     .tags {
@@ -260,11 +286,9 @@
     }
 
     .contact-box {
+      padding: 24px;
       background: linear-gradient(180deg, rgba(110, 168, 254, 0.08), rgba(255, 255, 255, 0.04));
       border: 1px solid rgba(110, 168, 254, 0.18);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
     }
 
     .contact-links {
@@ -281,6 +305,11 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       color: var(--text);
       font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .contact-links a:hover {
+      background: rgba(255, 255, 255, 0.1);
     }
 
     footer {
@@ -345,7 +374,7 @@
 
         <div class="hero-buttons">
           <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+          <a class="btn btn-secondary" href="#contact">Connect</a>
         </div>
 
         <div class="tags">
@@ -391,6 +420,7 @@
 
       <div class="about-grid">
         <div class="card">
+          <div class="card-icon">🧠</div>
           <h3>What I’m building</h3>
           <p>
             A growing collection of project notes, lab work, practical write-ups, and
@@ -398,6 +428,7 @@
           </p>
         </div>
         <div class="card">
+          <div class="card-icon">🚀</div>
           <h3>Why this site exists</h3>
           <p>
             To create a central place for my work, document progress, and turn learning
@@ -412,33 +443,38 @@
     <div class="container">
       <h2 class="section-title">Projects</h2>
       <p class="section-subtitle">
-        These are example sections for now. You can replace them later with your actual
-        lab builds, write-ups, assessments, and portfolio pieces.
+        A snapshot of the kinds of builds and write-ups I’ll be adding here over time.
       </p>
 
       <div class="cards">
         <div class="card">
+          <div class="card-icon">🖧</div>
           <h3>Home Lab Builds</h3>
           <p>
-            Networking equipment, virtual machines, routing, switching, and infrastructure
-            experiments built for learning and testing.
+            Routers, switches, virtual machines, and infrastructure builds used for
+            learning, testing, and improving hands-on skills.
           </p>
+          <div class="card-link">Lab setups and notes</div>
         </div>
 
         <div class="card">
+          <div class="card-icon">☁️</div>
           <h3>Cloud & Infrastructure</h3>
           <p>
-            Notes and practical work around cloud environments, service configuration,
-            deployment, and networking concepts.
+            Practical work around cloud services, deployments, DNS, hosting, and core
+            infrastructure concepts.
           </p>
+          <div class="card-link">Cloud learning and deployment</div>
         </div>
 
         <div class="card">
-          <h3>Troubleshooting & Lessons</h3>
+          <div class="card-icon">🛠️</div>
+          <h3>Troubleshooting & Fixes</h3>
           <p>
-            Real issues, fixes, and lessons learned while working through labs, projects,
-            and technical setups.
+            Issues, solutions, and lessons learned while setting up services, working
+            through labs, and solving technical problems.
           </p>
+          <div class="card-link">Problems solved along the way</div>
         </div>
       </div>
     </div>
@@ -453,18 +489,21 @@
 
       <div class="cards">
         <div class="card">
+          <div class="card-icon">🌐</div>
           <h3>Networking</h3>
           <p>
             VLANs, routing, switching, addressing, DNS, and practical network design.
           </p>
         </div>
         <div class="card">
+          <div class="card-icon">☁</div>
           <h3>Cloud</h3>
           <p>
             Building stronger understanding of cloud services, deployment, and connectivity.
           </p>
         </div>
         <div class="card">
+          <div class="card-icon">📝</div>
           <h3>Documentation</h3>
           <p>
             Turning study and lab work into clean notes, guides, and shareable project write-ups.
@@ -479,12 +518,38 @@
       <div class="contact-box">
         <h2 class="section-title">Contact</h2>
         <p class="section-subtitle">
+          Please feel free to follow me below.
+        </p>
 
         <div class="contact-links">
-          <a href="https://github.com/SudoNym404" target="_blank">GitHub</a>
-          <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank">LinkedIn</a>
-          <a href="https://www.instagram.com/sudo.nym200/?hl=en" target="_blank">Instagram</a>
-          <a href="mailto:you@example.com">Email</a>
+            <a href="https://github.com/SudoNym404" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
+                  <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.2 11.4c.6.1.8-.26.8-.58v-2.2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.38-1.34-1.75-1.34-1.75-1.1-.75.08-.74.08-.74 1.22.08 1.86 1.25 1.86 1.25 1.08 1.86 2.84 1.32 3.54 1 .1-.78.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.93 0-1.3.46-2.36 1.23-3.2-.12-.3-.54-1.5.12-3.13 0 0 1-.32 3.3 1.22a11.4 11.4 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.66 1.63.24 2.83.12 3.13.77.84 1.23 1.9 1.23 3.2 0 4.61-2.81 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.3c0 .32.2.69.81.57A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+                GitHub
+              </a>
+
+            <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
+                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.37V9h3.41v1.56h.05c.48-.9 1.65-1.85 3.4-1.85 3.64 0 4.31 2.4 4.31 5.52v6.22zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.23 0z"/>
+                </svg>
+                LinkedIn
+              </a>
+
+            <a href="https://www.instagram.com/sudo.nym200/?hl=en" target="_blank">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
+                  <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.22 4 20 5.78 20 7.75v8.5c0 1.97-1.78 3.75-3.75 3.75h-8.5C5.78 20 4 18.22 4 16.25v-8.5C4 5.78 5.78 4 7.75 4zm8.75 1.5a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
+                </svg>
+                Instagram
+              </a>
+
+            <a href="mailto:your@email.com">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
+                  <path d="M2 4h20v16H2V4zm10 9l10-7H2l10 7zm0 2l-10-7v10h20V8l-10 7z"/>
+                </svg>
+                Email
+              </a>
+
         </div>
       </div>
     </div>
