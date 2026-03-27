@@ -1,11 +1,501 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Sudonym</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sudonym | Network & Cloud Engineering</title>
+  <meta name="description" content="Sudonym. Learning, building and sharing along the way." />
+  <style>
+    :root {
+      --bg: #0b1020;
+      --bg-secondary: #121a31;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-border: rgba(255, 255, 255, 0.12);
+      --text: #f3f6ff;
+      --muted: #b9c2de;
+      --accent: #6ea8fe;
+      --accent-2: #7ef0c2;
+      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+      --max-width: 1100px;
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behaviour: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(110, 168, 254, 0.18), transparent 30%),
+        radial-gradient(circle at top right, rgba(126, 240, 194, 0.12), transparent 25%),
+        linear-gradient(180deg, #0b1020 0%, #0d1326 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: rgba(11, 16, 32, 0.7);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      transition: 0.2s ease;
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 90px 0 70px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(110, 168, 254, 0.12);
+      border: 1px solid rgba(110, 168, 254, 0.28);
+      color: #d8e7ff;
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.2rem);
+      line-height: 1.05;
+      margin: 0 0 18px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.08rem;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 0 28px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 12px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #8fbcff);
+      color: #08101f;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.12);
+      color: var(--text);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .hero-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .stat h3 {
+      margin: 0 0 6px;
+      font-size: 1.7rem;
+      color: var(--accent-2);
+    }
+
+    .stat p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    section {
+      padding: 28px 0 40px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      margin: 0 0 10px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin: 0 0 28px;
+      max-width: 720px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .tags {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    .tag {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      color: #dce8ff;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .contact-box {
+      background: linear-gradient(180deg, rgba(110, 168, 254, 0.08), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(110, 168, 254, 0.18);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-links a {
+      padding: 11px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    footer {
+      padding: 35px 0 50px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .about-grid,
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        gap: 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
-<body style="font-family: Arial; text-align: center; margin-top: 100px;">
-    <h1>Sudonym</h1>
-  
-    <p>Learning, building and sharing along the way.</p>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">Sudo<span>Nym</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#focus">Focus</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Network & Cloud Engineering</div>
+        <h1>Learning, building and sharing along the way.</h1>
+        <p>
+          Welcome to Sudonym. This is where I document my IT learning, home lab work,
+          networking projects, and cloud journey as I continue building practical skills
+          for the real world.
+        </p>
+
+        <div class="hero-buttons">
+          <a class="btn btn-primary" href="#projects">View Projects</a>
+          <a class="btn btn-secondary" href="#contact">Get in Touch</a>
+        </div>
+
+        <div class="tags">
+          <span class="tag">Networking</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Home Lab</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">Linux</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <div class="stats">
+          <div class="stat">
+            <h3>TAFE</h3>
+            <p>Building practical networking and cloud skills through study and lab work.</p>
+          </div>
+          <div class="stat">
+            <h3>Home Lab</h3>
+            <p>Testing services, configurations, and real-world setups in a safe environment.</p>
+          </div>
+          <div class="stat">
+            <h3>Projects</h3>
+            <p>Documenting setups, problem-solving, and lessons learned as I go.</p>
+          </div>
+          <div class="stat">
+            <h3>Growth</h3>
+            <p>Working towards stronger foundations in networking, cloud, and systems.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="container">
+      <h2 class="section-title">About</h2>
+      <p class="section-subtitle">
+        I’m building this site as a place to share my journey into IT, with a focus on
+        networking, cloud, home lab projects, and hands-on learning.
+      </p>
+
+      <div class="about-grid">
+        <div class="card">
+          <h3>What I’m building</h3>
+          <p>
+            A growing collection of project notes, lab work, practical write-ups, and
+            lessons learned while developing real-world technical skills.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Why this site exists</h3>
+          <p>
+            To create a central place for my work, document progress, and turn learning
+            into something visible, useful, and worth sharing.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-subtitle">
+        These are example sections for now. You can replace them later with your actual
+        lab builds, write-ups, assessments, and portfolio pieces.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Home Lab Builds</h3>
+          <p>
+            Networking equipment, virtual machines, routing, switching, and infrastructure
+            experiments built for learning and testing.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Cloud & Infrastructure</h3>
+          <p>
+            Notes and practical work around cloud environments, service configuration,
+            deployment, and networking concepts.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Troubleshooting & Lessons</h3>
+          <p>
+            Real issues, fixes, and lessons learned while working through labs, projects,
+            and technical setups.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="focus">
+    <div class="container">
+      <h2 class="section-title">Current Focus</h2>
+      <p class="section-subtitle">
+        A simple snapshot of what I’m currently learning and working on.
+      </p>
+
+      <div class="cards">
+        <div class="card">
+          <h3>Networking</h3>
+          <p>
+            VLANs, routing, switching, addressing, DNS, and practical network design.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Cloud</h3>
+          <p>
+            Building stronger understanding of cloud services, deployment, and connectivity.
+          </p>
+        </div>
+        <div class="card">
+          <h3>Documentation</h3>
+          <p>
+            Turning study and lab work into clean notes, guides, and shareable project write-ups.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container">
+      <div class="contact-box">
+        <h2 class="section-title">Contact</h2>
+        <p class="section-subtitle">
+          This section can link out to your GitHub, LinkedIn, Instagram, or email later on.
+        </p>
+
+        <div class="contact-links">
+          <a href="https://github.com/SudoNym404" target="_blank">GitHub</a>
+          <a href="#" target="_blank">LinkedIn</a>
+          <a href="#" target="_blank">Instagram</a>
+          <a href="mailto:you@example.com">Email</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Sudonym. Built with GitHub Pages.
+    </div>
+  </footer>
 </body>
 </html>
