@@ -5,561 +5,277 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sudonym | Network & Cloud Engineering</title>
   <meta name="description" content="Sudonym. Learning, building and sharing along the way." />
+
   <style>
     :root {
       --bg: #0b1020;
-      --bg-secondary: #121a31;
       --card: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --border: rgba(255, 255, 255, 0.12);
       --text: #f3f6ff;
       --muted: #b9c2de;
       --accent: #6ea8fe;
-      --accent-2: #7ef0c2;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      --max-width: 1100px;
+      --accent2: #7ef0c2;
       --radius: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behaviour: smooth;
+      --max: 1100px;
     }
 
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(110, 168, 254, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(126, 240, 194, 0.12), transparent 25%),
-        linear-gradient(180deg, #0b1020 0%, #0d1326 100%);
+      background: #0b1020;
       color: var(--text);
-      line-height: 1.6;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
 
     .container {
-      width: min(92%, var(--max-width));
-      margin: 0 auto;
+      width: min(92%, var(--max));
+      margin: auto;
     }
 
     .nav {
       position: sticky;
       top: 0;
-      z-index: 20;
-      backdrop-filter: blur(14px);
-      background: rgba(11, 16, 32, 0.7);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(11,16,32,0.8);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
     }
 
     .nav-inner {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       padding: 18px 0;
     }
 
-    .brand {
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: 0.4px;
-    }
-
-    .brand span {
-      color: var(--accent);
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 22px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
+    .nav a {
       color: var(--muted);
-      transition: 0.2s ease;
-      font-size: 0.95rem;
-    }
-
-    .nav-links a:hover {
-      color: var(--text);
+      margin-left: 20px;
     }
 
     .hero {
-      padding: 90px 0 70px;
+      padding: 80px 0;
     }
 
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 30px;
-      align-items: center;
-    }
-
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(110, 168, 254, 0.12);
-      border: 1px solid rgba(110, 168, 254, 0.28);
-      color: #d8e7ff;
-      font-size: 0.85rem;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(2.2rem, 5vw, 4.2rem);
-      line-height: 1.05;
-      margin: 0 0 18px;
-      letter-spacing: -1px;
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
     }
 
     .hero p {
-      font-size: 1.08rem;
       color: var(--muted);
-      max-width: 700px;
-      margin: 0 0 28px;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-bottom: 28px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 13px 20px;
-      border-radius: 12px;
-      font-weight: 700;
-      transition: 0.2s ease;
-      border: 1px solid transparent;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #8fbcff);
-      color: #08101f;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.12);
-      color: var(--text);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .hero-card,
-    .card,
-    .contact-box {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .hero-card {
-      padding: 26px;
+      max-width: 600px;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(2,1fr);
+      gap: 15px;
+      margin-top: 30px;
     }
 
     .stat {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
+      background: var(--card);
       padding: 18px;
-    }
-
-    .stat h3 {
-      margin: 0 0 6px;
-      font-size: 1.2rem;
-      color: var(--accent-2);
-    }
-
-    .stat p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 0.95rem;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
     }
 
     section {
-      padding: 28px 0 40px;
-    }
-
-    .section-title {
-      font-size: 1.8rem;
-      margin: 0 0 10px;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      margin: 0 0 28px;
-      max-width: 720px;
+      padding: 50px 0;
     }
 
     .cards {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3,1fr);
       gap: 20px;
     }
 
     .card {
-      padding: 22px;
-      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(110, 168, 254, 0.35);
-      background: rgba(255, 255, 255, 0.08);
+      background: var(--card);
+      padding: 20px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
     }
 
     .card-icon {
-      width: 52px;
-      height: 52px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 14px;
-      margin-bottom: 16px;
-      background: rgba(110, 168, 254, 0.12);
-      border: 1px solid rgba(110, 168, 254, 0.22);
-      font-size: 1.35rem;
-    }
-
-    .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.15rem;
-    }
-
-    .card p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 0.97rem;
-    }
-
-    .card-link {
-      font-size: 0.92rem;
+      margin-bottom: 10px;
       color: var(--accent);
-      font-weight: 700;
     }
 
-    .tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-    }
-
-    .tag {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: #dce8ff;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .contact-box {
-      padding: 24px;
-      background: linear-gradient(180deg, rgba(110, 168, 254, 0.08), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(110, 168, 254, 0.18);
-    }
-
-    .contact-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
-
-    .contact-links a {
-      padding: 11px 14px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: var(--text);
-      font-size: 0.95rem;
-      transition: 0.2s ease;
-    }
-
-    .contact-links a:hover {
-      background: rgba(255, 255, 255, 0.1);
+    .card a {
+      color: var(--accent);
     }
 
     footer {
-      padding: 35px 0 50px;
-      color: var(--muted);
-      font-size: 0.92rem;
       text-align: center;
+      padding: 40px;
+      color: var(--muted);
     }
 
-    @media (max-width: 920px) {
-      .hero-grid,
-      .about-grid,
-      .cards {
+    @media (max-width: 800px) {
+      .cards, .stats {
         grid-template-columns: 1fr;
-      }
-
-      .nav-inner {
-        gap: 16px;
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
-    @media (max-width: 560px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 70px;
-      }
-
-      h1 {
-        font-size: 2.2rem;
       }
     }
   </style>
 </head>
+
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <div class="brand">Sudo<span>Nym</span></div>
-      <div class="nav-links">
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#focus">Focus</a>
-        <a href="#contact">Contact</a>
-      </div>
+
+<nav class="nav">
+  <div class="container nav-inner">
+    <strong>Sudonym</strong>
+    <div>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#lab">Lab</a>
+      <a href="#contact">Contact</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Network & Cloud Engineering</div>
-        <h1>Learning, building and sharing along the way.</h1>
-        <p>
-          Welcome to Sudonym. This is where I document my IT learning, home lab work,
-          networking projects, and cloud journey as I continue building practical skills
-          for the real world.
-        </p>
+<header class="hero">
+  <div class="container">
+    <h1>Learning, building and sharing along the way.</h1>
+    <p>
+      Hi, I’m Chris Osborn. Sudonym is my personal site where I document my IT learning,
+      home lab builds, networking projects, and progress as I work towards moving into IT.
+    </p>
 
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="#contact">Connect</a>
-        </div>
+    <div class="stats">
 
-        <div class="tags">
-          <span class="tag">Networking</span>
-          <span class="tag">Cloud</span>
-          <span class="tag">Home Lab</span>
-          <span class="tag">Cisco</span>
-          <span class="tag">Linux</span>
-          <span class="tag">GitHub Pages</span>
-        </div>
+      <div class="stat">
+        <h3>TAFE</h3>
+        <p><strong>Diploma of Information Technology</strong><br>2024 – 2026</p>
+        <p>Networking, cloud, servers, security, and enterprise environments.</p>
       </div>
 
-      <div class="hero-card">
-        <div class="stats">
-          <div class="stat">
-            <h3>TAFE</h3>
-
-            <p><strong>Diploma of Information Technology (Advanced Networking and Cloud Engineering)</strong><br>July 2024 – July 2026</p>
-            <p>
-              During this course I have developed practical skills across networking, cloud, and enterprise IT environments, including designing and deploying networks, configuring routers and switches, and working with Microsoft and Linux servers.</p>
-            <p>I have also worked with routing protocols such as OSPF and RIP, tunnelling technologies, and AWS cloud deployments, while building strong foundations in cybersecurity, teamwork, and professional practice.</p>
-          </div>
-          <div class="stat">
-            <h3>Home Lab</h3>
-            <p>Testing services, configurations, and real-world setups in a safe environment.</p>
-          </div>
-          <div class="stat">
-            <h3>Projects</h3>
-            <p>Documenting setups, problem-solving, and lessons learned as I go.</p>
-          </div>
-          <div class="stat">
-            <h3>Growth</h3>
-            <p>Working towards stronger foundations in networking, cloud, and systems.</p>
-          </div>
-        </div>
+      <div class="stat">
+        <h3>Home Lab</h3>
+        <p>Proxmox, Unraid, networking gear, and self-hosted services.</p>
       </div>
-    </div>
-  </header>
 
-  <section id="about">
-    <div class="container">
-      <h2 class="section-title">About</h2>
-      <p class="section-subtitle">
-        I’m building this site as a place to share my journey into IT, with a focus on
-        networking, cloud, home lab projects, and hands-on learning.
-      </p>
-
-      <div class="about-grid">
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <h3>What I’m building</h3>
-          <p>
-            A growing collection of project notes, lab work, practical write-ups, and
-            lessons learned while developing real-world technical skills.
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-icon">🚀</div>
-          <h3>Why this site exists</h3>
-          <p>
-            To create a central place for my work, document progress, and turn learning
-            into something visible, useful, and worth sharing.
-          </p>
-        </div>
+      <div class="stat">
+        <h3>Projects</h3>
+        <p>Real setups, troubleshooting, and lessons learned.</p>
       </div>
-    </div>
-  </section>
 
-  <section id="projects">
-    <div class="container">
-      <h2 class="section-title">Projects</h2>
-      <p class="section-subtitle">
-        A snapshot of the kinds of builds and write-ups I’ll be adding here over time.
-      </p>
-
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">🖧</div>
-          <h3>Home Lab Builds</h3>
-          <p>
-            Routers, switches, virtual machines, and infrastructure builds used for
-            learning, testing, and improving hands-on skills.
-          </p>
-          <div class="card-link">Lab setups and notes</div>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">☁️</div>
-          <h3>Cloud & Infrastructure</h3>
-          <p>
-            Practical work around cloud services, deployments, DNS, hosting, and core
-            infrastructure concepts.
-          </p>
-          <div class="card-link">Cloud learning and deployment</div>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">🛠️</div>
-          <h3>Troubleshooting & Fixes</h3>
-          <p>
-            Issues, solutions, and lessons learned while setting up services, working
-            through labs, and solving technical problems.
-          </p>
-          <div class="card-link">Problems solved along the way</div>
-        </div>
+      <div class="stat">
+        <h3>Goal</h3>
+        <p>Transition into networking / cloud engineering.</p>
       </div>
+
     </div>
-  </section>
+  </div>
+</header>
 
-  <section id="focus">
-    <div class="container">
-      <h2 class="section-title">Current Focus</h2>
-      <p class="section-subtitle">
-        A simple snapshot of what I’m currently learning and working on.
-      </p>
+<section id="about">
+  <div class="container">
+    <h2>About</h2>
 
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">🌐</div>
-          <h3>Networking</h3>
-          <p>
-            VLANs, routing, switching, addressing, DNS, and practical network design.
-          </p>
+    <p>
+      I’ve always had an interest in IT, but never fully pursued it until now. As I move
+      towards finishing my current role, I’m taking the opportunity to transition into IT
+      and build a long-term career.
+    </p>
+
+    <p>
+      This site is a place to document that journey — what I’m learning, building,
+      and figuring out along the way.
+    </p>
+
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2>Projects</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <div class="card-icon">
+          <!-- server icon -->
+          <svg width="24" height="24" fill="currentColor"><rect x="4" y="5" width="16" height="5"/><rect x="4" y="14" width="16" height="5"/></svg>
         </div>
-        <div class="card">
-          <div class="card-icon">☁</div>
-          <h3>Cloud</h3>
-          <p>
-            Building stronger understanding of cloud services, deployment, and connectivity.
-          </p>
-        </div>
-        <div class="card">
-          <div class="card-icon">📝</div>
-          <h3>Documentation</h3>
-          <p>
-            Turning study and lab work into clean notes, guides, and shareable project write-ups.
-          </p>
-        </div>
+        <h3>Home Lab Builds</h3>
+        <p>Networking gear, virtual machines, and lab setups.</p>
+        <a href="homelab.html">View lab →</a>
       </div>
-    </div>
-  </section>
 
-  <section id="contact">
-    <div class="container">
-      <div class="contact-box">
-        <h2 class="section-title">Contact</h2>
-
-        <div class="contact-links">
-            <a href="https://github.com/SudoNym404" target="_blank">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
-                  <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.2 11.4c.6.1.8-.26.8-.58v-2.2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.38-1.34-1.75-1.34-1.75-1.1-.75.08-.74.08-.74 1.22.08 1.86 1.25 1.86 1.25 1.08 1.86 2.84 1.32 3.54 1 .1-.78.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.93 0-1.3.46-2.36 1.23-3.2-.12-.3-.54-1.5.12-3.13 0 0 1-.32 3.3 1.22a11.4 11.4 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.66 1.63.24 2.83.12 3.13.77.84 1.23 1.9 1.23 3.2 0 4.61-2.81 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.3c0 .32.2.69.81.57A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/>
-                </svg>
-                GitHub
-              </a>
-
-            <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
-                  <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.37V9h3.41v1.56h.05c.48-.9 1.65-1.85 3.4-1.85 3.64 0 4.31 2.4 4.31 5.52v6.22zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.23 0z"/>
-                </svg>
-                LinkedIn
-              </a>
-
-            <a href="https://www.instagram.com/sudo.nym200/?hl=en" target="_blank">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
-                  <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.22 4 20 5.78 20 7.75v8.5c0 1.97-1.78 3.75-3.75 3.75h-8.5C5.78 20 4 18.22 4 16.25v-8.5C4 5.78 5.78 4 7.75 4zm8.75 1.5a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
-                </svg>
-                Instagram
-              </a>
-
-            <a href="mailto:sudonym.it@gmail.com">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" style="margin-right:6px;">
-                  <path d="M2 4h20v16H2V4zm10 9l10-7H2l10 7zm0 2l-10-7v10h20V8l-10 7z"/>
-                </svg>
-                Email
-              </a>
-
+      <div class="card">
+        <div class="card-icon">
+          <!-- cloud -->
+          <svg width="24" height="24" fill="currentColor"><path d="M6 19h11a4 4 0 0 0 0-8 5 5 0 0 0-9.7-1.5A3.5 3.5 0 0 0 6 19z"/></svg>
         </div>
+        <h3>Cloud</h3>
+        <p>AWS deployments and cloud learning.</p>
+        <a href="projects.html">View projects →</a>
       </div>
-    </div>
-  </section>
 
-  <footer>
-    <div class="container">
-      © 2026 Sudonym. Built with GitHub Pages.
+      <div class="card">
+        <div class="card-icon">
+          <!-- tools -->
+          <svg width="24" height="24" fill="currentColor"><path d="M14 3l7 7-3 3-7-7zM3 21l6-6 3 3-6 6z"/></svg>
+        </div>
+        <h3>Troubleshooting</h3>
+        <p>Problems solved and lessons learned.</p>
+        <a href="projects.html">View write-ups →</a>
+      </div>
+
     </div>
-  </footer>
+  </div>
+</section>
+
+<section id="lab">
+  <div class="container">
+    <h2>Lab Overview</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Virtualisation</h3>
+        <p>3 x Dell OptiPlex running Proxmox for lab environments.</p>
+      </div>
+
+      <div class="card">
+        <h3>Self Hosting</h3>
+        <p>Unraid server running Plex, ARR stack and containers.</p>
+      </div>
+
+      <div class="card">
+        <h3>Networking</h3>
+        <p>Cisco switches and routers used for routing and switching labs.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <h2>Contact</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <a href="https://github.com/SudoNym404" target="_blank">GitHub</a>
+      </div>
+
+      <div class="card">
+        <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank">LinkedIn</a>
+      </div>
+
+      <div class="card">
+        <a href="mailto:sudonym.it@gmail.com">Email</a>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  © 2026 Sudonym
+</footer>
+
 </body>
 </html>
