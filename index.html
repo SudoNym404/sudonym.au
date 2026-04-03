@@ -3,21 +3,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sudonym | Network & Cloud Engineering</title>
-  <meta name="description" content="Sudonym. Learning, building and sharing along the way." />
+
+  <title>Sudonym | Chris Osborn | IT Learning, Home Lab, Networking & Cloud</title>
+  <meta name="description" content="Sudonym is the personal site of Chris Osborn, documenting IT learning, home lab builds, networking projects, cloud study, and the journey into a career in IT." />
+  <meta name="keywords" content="Chris Osborn, Sudonym, IT portfolio, home lab, networking, cloud, Cisco, Proxmox, Unraid, GitHub Pages, TAFE, IT learning" />
+  <meta name="author" content="Chris Osborn" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Sudonym | Chris Osborn" />
+  <meta property="og:description" content="IT learning, home lab builds, networking projects, cloud study, and the journey into a career in IT." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sudonym.au/" />
+  <meta property="og:site_name" content="Sudonym" />
+
+  <meta name="theme-color" content="#07102a" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Chris Osborn",
+    "url": "https://sudonym.au/",
+    "sameAs": [
+      "https://github.com/SudoNym404",
+      "https://www.linkedin.com/in/chris-osborn200/",
+      "https://www.instagram.com/sudo.nym200/?hl=en"
+    ],
+    "description": "Chris Osborn documents IT learning, home lab builds, networking projects, and cloud study through Sudonym."
+  }
+  </script>
+
   <style>
     :root {
-      --bg: #0b1020;
-      --bg-secondary: #121a31;
+      --bg: #07102a;
+      --bg-soft: #0b1638;
       --card: rgba(255, 255, 255, 0.06);
-      --card-border: rgba(255, 255, 255, 0.12);
+      --card-hover: rgba(255, 255, 255, 0.085);
+      --card-border: rgba(255, 160, 64, 0.18);
       --text: #f3f6ff;
       --muted: #b9c2de;
-      --accent: #6ea8fe;
-      --accent-2: #7ef0c2;
-      --shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-      --max-width: 1100px;
-      --radius: 18px;
+      --accent: #ffa040;
+      --accent-soft: rgba(255, 160, 64, 0.12);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --max-width: 1120px;
+      --content-width: 860px;
+      --radius: 20px;
     }
 
     * {
@@ -31,11 +61,11 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(110, 168, 254, 0.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(126, 240, 194, 0.10), transparent 25%),
-        linear-gradient(180deg, #07102a 0%, #09122b 100%);
       color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 160, 64, 0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(255, 160, 64, 0.06), transparent 18%),
+        linear-gradient(180deg, #050d24 0%, #07102a 42%, #07102a 100%);
       line-height: 1.6;
     }
 
@@ -49,13 +79,17 @@
       margin: 0 auto;
     }
 
+    .content-width {
+      max-width: var(--content-width);
+    }
+
     .nav {
       position: sticky;
       top: 0;
-      z-index: 30;
+      z-index: 40;
       backdrop-filter: blur(14px);
-      background: rgba(7, 12, 28, 0.72);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(5, 10, 24, 0.72);
+      border-bottom: 1px solid rgba(255, 160, 64, 0.10);
     }
 
     .nav-inner {
@@ -68,7 +102,7 @@
     .brand {
       font-size: 1.15rem;
       font-weight: 700;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
     }
 
     .brand .sudo {
@@ -81,272 +115,290 @@
 
     .nav-links {
       display: flex;
-      gap: 22px;
+      gap: 24px;
       flex-wrap: wrap;
     }
 
     .nav-links a {
       color: var(--muted);
+      font-size: 0.96rem;
       transition: 0.2s ease;
-      font-size: 0.95rem;
     }
 
     .nav-links a:hover {
-      color: var(--text);
+      color: var(--accent);
     }
 
     .hero {
-      padding: 90px 0 70px;
+      padding: 72px 0 34px;
     }
 
-    .hero-grid {
+    .intro-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 30px;
+      grid-template-columns: 640px 260px;
+      gap: 20px;
       align-items: start;
+      justify-content: start;
+      margin-bottom: 20px;
     }
 
-    .eyebrow {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      background: rgba(110, 168, 254, 0.12);
-      border: 1px solid rgba(110, 168, 254, 0.28);
-      color: #d8e7ff;
-      font-size: 0.85rem;
-      margin-bottom: 18px;
+    .intro-kicker {
+      font-size: clamp(1.6rem, 2.1vw, 2.4rem);
+      font-weight: 700;
+      margin: 0 0 8px;
+      color: #ffffff;
     }
 
-    h1 {
-      font-size: clamp(2.6rem, 5.6vw, 5.1rem);
-      line-height: 1.02;
+    .intro-name {
+      font-size: clamp(2.8rem, 5.2vw, 5rem);
+      line-height: 0.98;
+      margin: 0 0 10px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      text-shadow: 0 0 14px rgba(255, 160, 64, 0.18);
+    }
+
+    .intro-name .first {
+      color: var(--accent);
+    }
+
+    .intro-name .last {
+      color: #ffffff;
+    }
+
+    .intro-role {
+      font-size: clamp(1.2rem, 1.8vw, 1.6rem);
+      font-weight: 700;
       margin: 0 0 18px;
-      letter-spacing: -1.6px;
-      max-width: 720px;
+      color: #ffffff;
     }
 
-    .hero p {
-      font-size: 1.08rem;
+    .intro-role .highlight {
+      color: var(--accent);
+    }
+
+    .intro-copy {
       color: var(--muted);
+      font-size: 1.04rem;
       max-width: 700px;
-      margin: 0 0 28px;
+      margin: 0 0 20px;
     }
 
-    .hero-buttons {
+    .intro-buttons {
       display: flex;
       gap: 14px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-top: 18px;
+      margin-bottom: 18px;
     }
 
     .btn {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 144px;
       padding: 13px 20px;
-      border-radius: 12px;
+      border-radius: 999px;
       font-weight: 700;
+      border: 1px solid rgba(255, 160, 64, 0.28);
       transition: 0.2s ease;
-      border: 1px solid transparent;
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent), #8fbcff);
-      color: #08101f;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.04);
       color: var(--text);
     }
 
-    .btn-secondary:hover {
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 160, 64, 0.44);
       background: rgba(255, 255, 255, 0.08);
     }
 
-    .hero-card,
-    .card,
+    .btn-primary {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      box-shadow: none;
+    }
+
+    .hero-tagline {
+      font-size: clamp(2rem, 4.4vw, 4.3rem);
+      line-height: 1.02;
+      margin: 18px 0 0;
+      font-weight: 800;
+      letter-spacing: -1.3px;
+      color: #ffffff;
+      max-width: 700px;
+    }
+
+    .hero-photo-wrap {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      padding-top: 8px;
+      padding-left: 0;
+    }
+
+    .hero-photo {
+      width: 240px;
+      aspect-ratio: 1 / 1;
+      border-radius: 50%;
+      padding: 10px;
+      background:
+        radial-gradient(circle at center, rgba(255, 160, 64, 0.14), rgba(255, 160, 64, 0.04) 60%, transparent 70%);
+      box-shadow:
+        0 0 0 1px rgba(255, 160, 64, 0.22),
+        0 0 22px rgba(255, 160, 64, 0.16),
+        0 0 40px rgba(255, 160, 64, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo-inner {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        #10192f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 26px;
+      overflow: hidden;
+    }
+
+    .hero-photo-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      display: block;
+    }
+
+    .hero-photo-placeholder {
+      color: #d8e7ff;
+      font-size: 0.98rem;
+      max-width: 180px;
+    }
+
+    .hero-photo-placeholder svg {
+      display: block;
+      margin: 0 auto 14px;
+      color: var(--accent);
+    }
+
+    section {
+      padding: 34px 0 48px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 780px;
+      font-size: 1.03rem;
+    }
+
+    .tafe-box,
     .contact-box,
-    .profile-box {
+    .tag-box,
+    .card {
       background: var(--card);
       border: 1px solid var(--card-border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
 
-    .hero-card {
-      padding: 26px;
-      max-width: 760px;
+    .tafe-box {
+      margin-top: 24px;
+      max-width: 640px;
+      padding: 22px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 160, 64, 0.18);
     }
 
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
+    .tafe-box h3 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      color: var(--accent);
     }
 
-    .stat {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      padding: 18px;
-      min-height: 170px;
-    }
-
-    .stat h3 {
-      margin: 0 0 8px;
-      font-size: 1.05rem;
-      color: var(--accent-2);
-    }
-
-    .stat p {
+    .tafe-box p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.97rem;
+      font-size: 1rem;
     }
 
-    section {
-      padding: 28px 0 46px;
+    .tafe-box p + p {
+      margin-top: 12px;
     }
 
-    .section-title {
-      font-size: 1.95rem;
-      margin: 0 0 12px;
-    }
-
-    .section-subtitle {
-      color: var(--muted);
-      margin: 0 0 28px;
-      max-width: 780px;
-      font-size: 1.04rem;
-    }
-
-    .cards {
+    .cards-single {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
+      grid-template-columns: 1fr;
+      gap: 16px;
     }
 
     .card {
-      padding: 22px;
+      display: block;
+      padding: 20px 22px;
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(110, 168, 254, 0.35);
-      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-3px);
+      border-color: rgba(255, 160, 64, 0.32);
+      background: var(--card-hover);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 10px;
     }
 
     .card-icon {
       width: 52px;
       height: 52px;
+      flex: 0 0 auto;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       border-radius: 14px;
-      margin-bottom: 16px;
-      background: rgba(110, 168, 254, 0.12);
-      border: 1px solid rgba(110, 168, 254, 0.22);
-      color: #9cc2ff;
+      background: rgba(255, 160, 64, 0.08);
+      border: 1px solid rgba(255, 160, 64, 0.22);
+      color: var(--accent);
     }
 
     .card h3 {
-      margin: 0 0 10px;
-      font-size: 1.15rem;
+      margin: 0;
+      font-size: 1.18rem;
+      color: #ffffff;
     }
 
     .card p {
-      margin: 0 0 16px;
-      color: var(--muted);
-      font-size: 0.97rem;
-    }
-
-    .card-link {
-      font-size: 0.95rem;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .tags {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 18px;
-      margin-bottom: 24px;
-    }
-
-    .tag {
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: #dce8ff;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .about-profile {
-      display: grid;
-      grid-template-columns: 220px 1fr;
-      gap: 24px;
-      align-items: start;
-      margin-bottom: 24px;
-    }
-
-    .profile-box {
-      padding: 16px;
-      min-height: 260px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      background: linear-gradient(180deg, rgba(110, 168, 254, 0.09), rgba(255, 255, 255, 0.04));
-    }
-
-    .profile-placeholder {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      background: rgba(255,255,255,0.05);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 14px;
-      color: #aacaff;
-    }
-
-    .profile-box img {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-    }
-
-    .profile-box p {
       margin: 0;
       color: var(--muted);
-      font-size: 0.94rem;
+      font-size: 0.99rem;
+      max-width: 900px;
     }
 
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 20px;
+    .card-link-inline {
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.96rem;
     }
 
     .contact-box {
       padding: 28px;
-      background: linear-gradient(180deg, rgba(110, 168, 254, 0.08), rgba(255, 255, 255, 0.04));
-      border: 1px solid rgba(110, 168, 254, 0.18);
+      background: linear-gradient(180deg, rgba(255, 160, 64, 0.05), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 160, 64, 0.16);
     }
 
     .contact-links {
@@ -359,35 +411,54 @@
     .contact-links a {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 10px;
+      min-width: 152px;
       padding: 11px 16px;
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.06);
-      border: 1px solid rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.10);
       color: var(--text);
       font-size: 0.95rem;
       transition: 0.2s ease;
-      min-width: 140px;
-      justify-content: center;
     }
 
     .contact-links a:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(110, 168, 254, 0.35);
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 160, 64, 0.28);
+    }
+
+    .tag-box {
+      padding: 24px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: #dce8ff;
+      font-size: 0.90rem;
     }
 
     footer {
-      padding: 35px 0 50px;
+      padding: 36px 0 54px;
       color: var(--muted);
       font-size: 0.92rem;
       text-align: center;
     }
 
     @media (max-width: 980px) {
-      .hero-grid,
-      .about-profile,
-      .about-grid,
-      .cards {
+      .intro-grid {
         grid-template-columns: 1fr;
       }
 
@@ -397,26 +468,42 @@
         flex-direction: column;
       }
 
-      .profile-box {
-        min-height: 220px;
+      .hero-photo-wrap {
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-left: 0;
+      }
+
+      .content-width {
+        max-width: 100%;
       }
     }
 
-    @media (max-width: 560px) {
-      .stats {
-        grid-template-columns: 1fr;
-      }
-
+    @media (max-width: 640px) {
       .hero {
-        padding-top: 70px;
+        padding-top: 54px;
       }
 
-      h1 {
+      .intro-buttons,
+      .contact-links {
+        width: 100%;
+      }
+
+      .btn,
+      .contact-links a {
+        width: 100%;
+      }
+
+      .hero-photo {
+        width: min(300px, 84vw);
+      }
+
+      .intro-name {
         font-size: 2.4rem;
       }
 
-      .contact-links a {
-        width: 100%;
+      .hero-tagline {
+        font-size: 2.2rem;
       }
     }
   </style>
@@ -424,288 +511,226 @@
 <body>
   <nav class="nav">
     <div class="container nav-inner">
-      <div class="brand"><span class="sudo">Sudo</span><span class="nym">Nym</span></div>
+      <div class="brand">
+        <span class="sudo">Sudo</span><span class="nym">Nym</span>
+      </div>
+
       <div class="nav-links">
-        <a href="#about">About</a>
+        <a href="#home">Home</a>
         <a href="#projects">Projects</a>
         <a href="#lab">Lab</a>
         <a href="#contact">Contact</a>
+        <a href="#topics">Topics</a>
       </div>
     </div>
   </nav>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Network & Cloud Engineering</div>
-        <h1>Learning, building and sharing along the way.</h1>
-        <p>
-          Hi, I’m Chris Osborn. Sudonym is my personal site where I document my IT learning,
-          home lab work, networking projects, and progress as I work towards moving into IT.
-        </p>
+  <header class="hero" id="home">
+    <div class="container content-width">
+      <div class="intro-grid">
+        <div>
+          <p class="intro-kicker">I am</p>
 
-        <div class="hero-buttons">
-          <a class="btn btn-primary" href="#projects">View Projects</a>
-          <a class="btn btn-secondary" href="#contact">Connect</a>
-        </div>
+          <h1 class="intro-name">
+            <span class="first">CHRIS</span> <span class="last">OSBORN</span>
+          </h1>
 
-        <div class="tags">
-          <span class="tag">Networking</span>
-          <span class="tag">Cloud</span>
-          <span class="tag">Home Lab</span>
-          <span class="tag">Cisco</span>
-          <span class="tag">Linux</span>
-          <span class="tag">GitHub Pages</span>
-        </div>
-      </div>
+          <p class="intro-role">
+            &amp; I’m <span class="highlight">moving into IT</span>
+          </p>
 
-      <div class="hero-card">
-        <div class="stats">
-          <div class="stat">
+          <p class="intro-copy">
+            I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
+          </p>
+
+          <p class="intro-copy">
+            This site is where I document what I’m learning, building, and figuring out along the way, with a focus on networking, cloud, home lab projects, and practical hands-on skills.
+          </p>
+
+          <div class="tafe-box">
             <h3>TAFE</h3>
             <p>
               <strong>Diploma of Information Technology (Advanced Networking and Cloud Engineering)</strong><br>
               July 2024 – July 2026
             </p>
-            <p style="margin-top:12px;">
-              During this course I have been building practical skills across networking,
-              cloud, enterprise systems, virtualisation, cybersecurity, and professional practice.
+            <p>
+              Building practical skills across networking, cloud, enterprise systems, virtualisation, cybersecurity, and professional practice.
             </p>
           </div>
 
-          <div class="stat">
-            <h3>Home Lab</h3>
-            <p>
-              Proxmox, Unraid, networking gear, and self-hosted services used for learning,
-              testing, and building hands-on experience.
-            </p>
+          <div class="intro-buttons">
+            <a class="btn btn-primary" href="#projects">Projects</a>
+            <a class="btn" href="#lab">Lab</a>
+            <a class="btn" href="#contact">Contact</a>
           </div>
 
-          <div class="stat">
-            <h3>Projects</h3>
-            <p>
-              Documenting real setups, troubleshooting, lessons learned, and practical builds
-              as I continue developing my skills.
-            </p>
-          </div>
+          <h2 class="hero-tagline">Learning, building and sharing along the way.</h2>
+        </div>
 
-          <div class="stat">
-            <h3>Growth</h3>
-            <p>
-              Working towards a long-term move into IT, with a strong focus on networking,
-              cloud, and real-world capability.
-            </p>
+        <div class="hero-photo-wrap">
+          <div class="hero-photo">
+            <div class="hero-photo-inner">
+              <!-- Replace this block with your image later:
+              <img src="images/profile.jpg" alt="Chris Osborn">
+              -->
+              <div class="hero-photo-placeholder">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-3.87 0-7 2.24-7 5v1h14v-1c0-2.76-3.13-5-7-5z" fill="currentColor"/>
+                </svg>
+                Profile photo coming soon
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </header>
 
-  <section id="about">
-    <div class="container">
-      <div class="about-profile">
-        <div class="profile-box">
-          <!-- Replace this placeholder with your photo later if you want:
-          <img src="images/profile.jpg" alt="Chris Osborn">
-          -->
-          <div class="profile-placeholder">
-            <svg width="46" height="46" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-3.87 0-7 2.24-7 5v1h14v-1c0-2.76-3.13-5-7-5z" fill="currentColor"/>
-            </svg>
-          </div>
-          <p><strong>Chris Osborn</strong></p>
-          <p>Networking, cloud, home lab projects, and practical IT learning.</p>
-        </div>
-
-        <div>
-          <h2 class="section-title">About</h2>
-          <p class="section-subtitle">
-            I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
-          </p>
-          <p class="section-subtitle" style="margin-top:-8px;">
-            This site is a place to document that journey — what I’m learning, building, and figuring out along the way.
-          </p>
-        </div>
-      </div>
-
-      <div class="about-grid">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 3a7 7 0 0 1 7 7c0 3.87-3.13 7-7 7s-7-3.13-7-7a7 7 0 0 1 7-7zm0 0v14m-5-7h10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <h3>What I’m building</h3>
-          <p>
-            A growing collection of project notes, lab work, practical write-ups, and lessons
-            learned while developing real-world technical skills across networking, cloud, and self-hosting.
-          </p>
-        </div>
-
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M5 19h14M12 3l3.5 7H19l-5.5 4 2 7-5.5-4-5.5 4 2-7L1 10h3.5L8 3h4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-            </svg>
-          </div>
-          <h3>Why this site exists</h3>
-          <p>
-            To create a central place for my work, document progress, and turn learning into something visible, useful, and worth sharing as I continue building towards a career in IT.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <section id="projects">
-    <div class="container">
+    <div class="container content-width">
       <h2 class="section-title">Projects</h2>
       <p class="section-subtitle">
         A snapshot of the kinds of builds and write-ups I’ll be adding here over time.
       </p>
 
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="4" y="5" width="16" height="4" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
-              <rect x="4" y="15" width="16" height="4" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
-              <circle cx="8" cy="7" r="1" fill="currentColor"/>
-              <circle cx="8" cy="17" r="1" fill="currentColor"/>
-            </svg>
+      <div class="cards-single">
+        <a class="card" href="homelab.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="5" width="16" height="4" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="4" y="15" width="16" height="4" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="8" cy="7" r="1" fill="currentColor"/>
+                <circle cx="8" cy="17" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Home Lab Builds</h3>
           </div>
-          <h3>Home Lab Builds</h3>
           <p>
-            Networking gear, virtual machines, and infrastructure builds used for learning,
-            testing, and improving hands-on skills.
+            Networking gear, virtual machines, and infrastructure builds used for learning, testing, and improving hands-on skills.
           </p>
-          <a class="card-link" href="homelab.html">Lab setups and notes</a>
-        </div>
+          <p style="margin-top:12px;"><span class="card-link-inline">Open Home Lab page</span></p>
+        </a>
 
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 18h9a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-            </svg>
+        <a class="card" href="projects.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 18h9a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Cloud &amp; Infrastructure</h3>
           </div>
-          <h3>Cloud & Infrastructure</h3>
           <p>
-            Practical work around cloud services, deployments, DNS, hosting, and core
-            infrastructure concepts.
+            Practical work around cloud services, deployments, DNS, hosting, and core infrastructure concepts.
           </p>
-          <a class="card-link" href="projects.html">Cloud learning and deployment</a>
-        </div>
+          <p style="margin-top:12px;"><span class="card-link-inline">Open Projects page</span></p>
+        </a>
 
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M14.5 5.5l4 4m-8.8 8.8l-4.2.7.7-4.2L13.8 7l3.5 3.5-7.6 7.8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <a class="card" href="projects.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M14.5 5.5l4 4m-8.8 8.8l-4.2.7.7-4.2L13.8 7l3.5 3.5-7.6 7.8z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Troubleshooting &amp; Fixes</h3>
           </div>
-          <h3>Troubleshooting & Fixes</h3>
           <p>
-            Issues, solutions, and lessons learned while setting up services, working through labs,
-            and solving technical problems.
+            Issues, solutions, and lessons learned while setting up services, working through labs, and solving technical problems.
           </p>
-          <a class="card-link" href="projects.html">Problems solved along the way</a>
-        </div>
+          <p style="margin-top:12px;"><span class="card-link-inline">Open write-ups</span></p>
+        </a>
       </div>
     </div>
   </section>
 
   <section id="lab">
-    <div class="container">
+    <div class="container content-width">
       <h2 class="section-title">Lab Overview</h2>
       <p class="section-subtitle">
         A mix of virtualisation, self-hosting, networking gear, and day-to-day systems used for study, testing, and practical learning.
       </p>
 
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <rect x="4" y="4.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
-              <rect x="4" y="14.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
-              <circle cx="7.5" cy="7" r="1" fill="currentColor"/>
-              <circle cx="7.5" cy="17" r="1" fill="currentColor"/>
-            </svg>
+      <div class="cards-single">
+        <a class="card" href="homelab.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="4" y="14.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="7.5" cy="7" r="1" fill="currentColor"/>
+                <circle cx="7.5" cy="17" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Virtualisation</h3>
           </div>
-          <h3>Virtualisation</h3>
           <p>
             3 x Dell OptiPlex 7050 Micro PCs running Proxmox for virtual lab environments and testing.
           </p>
-        </div>
+        </a>
 
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M7 18h9a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
-              <path d="M12 11v5m0 0l-2-2m2 2l2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+        <a class="card" href="homelab.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 18h9a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M12 11v5m0 0l-2-2m2 2l2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Self Hosting</h3>
           </div>
-          <h3>Self Hosting</h3>
           <p>
             Unraid server running Plex, ARR services, containers, and centralised home file storage.
           </p>
-        </div>
+        </a>
 
-        <div class="card">
-          <div class="card-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
-              <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2L19 19M19 5l-2.8 2.8M7.8 16.2L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
-            </svg>
+        <a class="card" href="homelab.html">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2L19 19M19 5l-2.8 2.8M7.8 16.2L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Networking</h3>
           </div>
-          <h3>Networking</h3>
           <p>
             Cisco switches and routers used for routing, switching, VLAN, and protocol lab work.
           </p>
-        </div>
+        </a>
       </div>
     </div>
   </section>
 
   <section id="contact">
-    <div class="container">
+    <div class="container content-width">
       <div class="contact-box">
         <h2 class="section-title">Contact</h2>
-        <p class="section-subtitle" style="margin-bottom:18px;">
-          Please feel free to connect with me below.
-        </p>
 
         <div class="contact-links">
-          <a href="https://github.com/SudoNym404" target="_blank">
+          <a href="https://github.com/SudoNym404" target="_blank" rel="noopener noreferrer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M12 0C5.37 0 0 5.37 0 12a12 12 0 008.2 11.4c.6.1.8-.26.8-.58v-2.2c-3.34.73-4.04-1.6-4.04-1.6-.55-1.38-1.34-1.75-1.34-1.75-1.1-.75.08-.74.08-.74 1.22.08 1.86 1.25 1.86 1.25 1.08 1.86 2.84 1.32 3.54 1 .1-.78.42-1.32.76-1.62-2.66-.3-5.47-1.33-5.47-5.93 0-1.3.46-2.36 1.23-3.2-.12-.3-.54-1.5.12-3.13 0 0 1-.32 3.3 1.22a11.4 11.4 0 016 0c2.3-1.54 3.3-1.22 3.3-1.22.66 1.63.24 2.83.12 3.13.77.84 1.23 1.9 1.23 3.2 0 4.61-2.81 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.3c0 .32.2.69.81.57A12 12 0 0024 12c0-6.63-5.37-12-12-12z"/>
             </svg>
             GitHub
           </a>
 
-          <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank">
+          <a href="https://www.linkedin.com/in/chris-osborn200/" target="_blank" rel="noopener noreferrer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.13 1.45-2.13 2.95v5.66H9.37V9h3.41v1.56h.05c.48-.9 1.65-1.85 3.4-1.85 3.64 0 4.31 2.4 4.31 5.52v6.22zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.21 0 22.23 0z"/>
             </svg>
             LinkedIn
           </a>
 
-          <a href="https://www.instagram.com/sudo.nym200/?hl=en" target="_blank">
+          <a href="https://www.instagram.com/sudo.nym200/?hl=en" target="_blank" rel="noopener noreferrer">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M7.75 2C4.57 2 2 4.57 2 7.75v8.5C2 19.43 4.57 22 7.75 22h8.5C19.43 22 22 19.43 22 16.25v-8.5C22 4.57 19.43 2 16.25 2h-8.5zm0 2h8.5C18.22 4 20 5.78 20 7.75v8.5c0 1.97-1.78 3.75-3.75 3.75h-8.5C5.78 20 4 18.22 4 16.25v-8.5C4 5.78 5.78 4 7.75 4zm8.75 1.5a1 1 0 110 2 1 1 0 010-2zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z"/>
             </svg>
             Instagram
           </a>
 
-          <a id="email-link" href="#">Email</a>
-
-          <script>
-            const user = "sudonym.it";
-            const domain = "gmail.com";
-            const email = `${user}@${domain}`;
-
-            const link = document.getElementById("email-link");
-            link.href = `mailto:${email}`;
-            link.textContent = "Email";
-          </script>
+          <a id="email-link" href="#" aria-label="Email Chris Osborn">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M2 4h20v16H2V4zm10 9l10-7H2l10 7zm0 2l-10-7v10h20V8l-10 7z"/>
             </svg>
@@ -716,10 +741,49 @@
     </div>
   </section>
 
+  <section id="topics">
+    <div class="container content-width">
+      <div class="tag-box">
+        <h2 class="section-title">Topics</h2>
+        <p class="section-subtitle" style="margin-bottom:14px;">
+          Areas I’m currently learning, building, and working through.
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">Networking</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Home Lab</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Proxmox</span>
+          <span class="tag">Unraid</span>
+          <span class="tag">Virtualisation</span>
+          <span class="tag">Self Hosting</span>
+          <span class="tag">Cybersecurity</span>
+          <span class="tag">Documentation</span>
+          <span class="tag">GitHub Pages</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <div class="container">
-      © 2026 Sudonym. Built with GitHub Pages.
+      © 2026 Sudonym | Chris Osborn
     </div>
   </footer>
+
+  <script>
+    (function () {
+      const user = "sudonym.it";
+      const domain = "gmail.com";
+      const email = user + "@" + domain;
+      const link = document.getElementById("email-link");
+
+      if (link) {
+        link.setAttribute("href", "mailto:" + email);
+      }
+    })();
+  </script>
 </body>
 </html>
