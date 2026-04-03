@@ -255,6 +255,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      overflow: hidden;
     }
 
     .hero-photo-inner {
@@ -488,22 +489,27 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 10px 0 12px;
-        padding: 0;
+        
       }
 
       .hero-photo-wrap {
         padding-left: 0;
         margin-left: 0 !important;
+        justify-content: center;
       }
 
       .hero-photo {
-        width: min(240px, 70vw);
+        width: min(200px, 65vw);
       }
 
       .content-width {
         max-width: 100%;
       }
+
+      .hero-photo-inner img {
+        object-position: center 20%;
+      }
+
     }
 
     @media (max-width: 640px) {
