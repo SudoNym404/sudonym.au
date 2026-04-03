@@ -439,7 +439,7 @@
       gap: 10px;
       margin-top: 8px;
     }
-
+    
     .tag {
       display: inline-flex;
       align-items: center;
@@ -460,22 +460,27 @@
 
     @media (max-width: 980px) {
       .intro-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 18px;
       }
 
-      .nav-inner {
-        gap: 16px;
-        align-items: flex-start;
-        flex-direction: column;
+      .hero-intro-top {
+        order: 1;
       }
 
       .hero-photo-wrap {
+        order: 2;
         justify-content: center;
         align-items: center;
         padding-left: 0;
         margin-left: 0 !important;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin-top: 6px;
+        margin-bottom: 6px;
+      }
+
+      .hero-intro-copy {
+        order: 3;
       }
 
       .hero-photo {
@@ -485,14 +490,8 @@
       .content-width {
         max-width: 100%;
       }
+    }
 
-      .hero-text {
-        order: 2;
-      }
-
-      .hero-photo-wrap {
-        order: 1;
-      }
 
       .intro-buttons {
         order: 3;
@@ -552,43 +551,48 @@
   <header class="hero" id="home">
     <div class="container content-width">
       <div class="intro-grid">
-        <div>
-          <p class="intro-kicker">I am</p>
+        <div class="hero-text">
+          <div class="hero-intro-top">
+            <p class="intro-kicker">I am</p>
 
-          <h1 class="intro-name">
-            <span class="first">CHRIS</span> <span class="last">OSBORN</span>
-          </h1>
+            <h1 class="intro-name">
+              <span class="first">CHRIS</span> <span class="last">OSBORN</span>
+            </h1>
 
-          <p class="intro-role">
-            &amp; I’m <span class="highlight">moving into IT</span>
-          </p>
-
-          <p class="intro-copy">
-            I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
-          </p>
-
-          <p class="intro-copy">
-            This site is where I document what I’m learning, building, and figuring out along the way, with a focus on networking, cloud, home lab projects, and practical hands-on skills.
-          </p>
-
-          <div class="tafe-box">
-            <h3>TAFE</h3>
-            <p>
-              <strong>Diploma of Information Technology (Advanced Networking and Cloud Engineering)</strong><br>
-              July 2024 – July 2026
-            </p>
-            <p>
-              Building practical skills across networking, cloud, enterprise systems, virtualisation, cybersecurity, and professional practice.
+            <p class="intro-role">
+              &amp; I’m <span class="highlight">moving into IT</span>
             </p>
           </div>
 
-          <div class="intro-buttons">
-            <a class="btn btn-primary" href="#projects">Projects</a>
-            <a class="btn" href="#lab">Lab</a>
-            <a class="btn" href="#contact">Contact</a>
-          </div>
+          <div class="hero-intro-copy">
+            <p class="intro-copy">
+              I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
+            </p>
 
-          <h2 class="hero-tagline">Learning, building and sharing along the way.</h2>
+            <p class="intro-copy">
+              This site is where I document what I’m learning, building, and figuring out along the way, with a focus on networking, cloud, home lab projects, and practical hands-on skills.
+            </p>
+
+            <div class="tafe-box">
+              <h3>TAFE</h3>
+              <p>
+                <strong>Diploma of Information Technology (Advanced Networking and Cloud Engineering)</strong><br>
+                July 2024 – July 2026
+              </p>
+              <p>
+                Building practical skills across networking, cloud, enterprise systems, virtualisation, cybersecurity, and professional practice.
+              </p>
+            </div>
+
+            <div class="intro-buttons">
+              <a class="btn btn-primary" href="#projects">Projects</a>
+              <a class="btn" href="#lab">Lab</a>
+              <a class="btn" href="#contact">Contact</a>
+            </div>
+
+            <h2 class="hero-tagline">Learning, building and sharing along the way.                
+        </h2>
+          </div>
         </div>
 
         <div class="hero-photo-wrap">
