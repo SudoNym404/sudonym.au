@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Books | Sudonym | Chris Osborn</title>
+  <meta name="description" content="Books, study resources, and reading notes from Chris Osborn's IT learning journey." />
+  <meta name="keywords" content="Chris Osborn, Sudonym, books, IT books, networking books, cloud books, study notes, reading list" />
+  <meta name="author" content="Chris Osborn" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Books | Sudonym" />
+  <meta property="og:description" content="Books, study resources, and reading notes from Chris Osborn's IT learning journey." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sudonym.au/books.html" />
+  <meta property="og:site_name" content="Sudonym" />
+
+  <meta name="theme-color" content="#07102a" />
+
+  <style>
+    :root {
+      --bg: #07102a;
+      --bg-soft: #0b1638;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-hover: rgba(255, 255, 255, 0.085);
+      --card-border: rgba(255, 160, 64, 0.18);
+      --text: #f3f6ff;
+      --muted: #b9c2de;
+      --accent: #ffa040;
+      --accent-soft: rgba(255, 160, 64, 0.12);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --max-width: 1120px;
+      --content-width: 860px;
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behaviour: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 160, 64, 0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(255, 160, 64, 0.06), transparent 18%),
+        linear-gradient(180deg, #050d24 0%, #07102a 42%, #07102a 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .content-width {
+      max-width: var(--content-width);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 10, 24, 0.72);
+      border-bottom: 1px solid rgba(255, 160, 64, 0.10);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .brand .sudo {
+      color: #ffffff;
+    }
+
+    .brand .nym {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 76px 0 34px;
+    }
+
+    .hero-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 160, 64, 0.16);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      padding: 34px 30px;
+    }
+
+    .page-kicker {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .page-title {
+      margin: 0 0 14px;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      line-height: 0.98;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      color: #ffffff;
+      text-shadow: 0 0 14px rgba(255, 160, 64, 0.16);
+    }
+
+    .page-title .highlight {
+      color: var(--accent);
+    }
+
+    .page-intro {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 150px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 160, 64, 0.28);
+      transition: 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 160, 64, 0.44);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    section {
+      padding: 28px 0 48px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 780px;
+      font-size: 1.03rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card,
+    .feature-box,
+    .tag-box {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 22px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 160, 64, 0.32);
+      background: var(--card-hover);
+    }
+
+    .card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 10px;
+    }
+
+    .card h3 {
+      margin: 0;
+      font-size: 1.15rem;
+      color: #ffffff;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .book-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 14px 0 0;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: #dce8ff;
+      font-size: 0.86rem;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      white-space: nowrap;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(255, 160, 64, 0.10);
+      border: 1px solid rgba(255, 160, 64, 0.22);
+    }
+
+    .feature-box {
+      padding: 26px;
+      background: linear-gradient(180deg, rgba(255, 160, 64, 0.05), rgba(255, 255, 255, 0.04));
+    }
+
+    .feature-box h3 {
+      margin: 0 0 12px;
+      font-size: 1.08rem;
+      color: var(--accent);
+    }
+
+    .feature-box p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .feature-box p + p {
+      margin-top: 12px;
+    }
+
+    .notes-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .note-item {
+      padding: 18px 20px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.045);
+      border: 1px solid rgba(255, 160, 64, 0.14);
+    }
+
+    .note-item h3 {
+      margin: 0 0 8px;
+      font-size: 1.04rem;
+      color: #ffffff;
+    }
+
+    .note-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .tag-box {
+      padding: 24px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: #dce8ff;
+      font-size: 0.90rem;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      font-size: 0.95rem;
+      margin-top: 14px;
+    }
+
+    footer {
+      padding: 36px 0 54px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 840px) {
+      .nav-inner {
+        gap: 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card {
+        padding: 28px 22px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 56px;
+      }
+
+      .hero-actions {
+        width: 100%;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .page-title {
+        font-size: 2.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="Sudonym home">
+        <span class="sudo">Sudo</span><span class="nym">Nym</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="projects.html">Projects</a>
+        <a href="homelab.html">Lab</a>
+        <a href="books.html" class="active">Books</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container content-width">
+      <div class="hero-card">
+        <p class="page-kicker">Reading & Study</p>
+        <h1 class="page-title">Books that help me <span class="highlight">learn and build</span></h1>
+        <p class="page-intro">
+          This page is for the books, references, and study material I’m working through as I build my skills in networking, cloud, infrastructure, Linux, and IT more broadly. Over time I’ll add notes, takeaways, and the books that have been the most useful.
+        </p>
+
+        <div class="hero-actions">
+          <a class="btn" href="#current-reading">Current Reading</a>
+          <a class="btn" href="#notes">Reading Notes</a>
+          <a class="btn" href="#topics">Topics</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="current-reading">
+    <div class="container content-width">
+      <h2 class="section-title">Current Reading</h2>
+      <p class="section-subtitle">
+        A few books and resources I’m either actively reading, planning to read next, or using to support study and lab work.
+      </p>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <div class="card-top">
+            <h3>CCNA 200-301 Official Cert Guide</h3>
+            <span class="status">In Progress</span>
+          </div>
+          <p>
+            Core networking reference for routing, switching, IPv4, IPv6, wireless, security fundamentals, and general CCNA preparation.
+          </p>
+          <div class="book-meta">
+            <span class="pill">Networking</span>
+            <span class="pill">Cisco</span>
+            <span class="pill">Certification</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>Linux Basics / Linux Reference Material</h3>
+            <span class="status">Ongoing</span>
+          </div>
+          <p>
+            Used to strengthen command line skills, system administration basics, file permissions, services, networking tools, and troubleshooting.
+          </p>
+          <div class="book-meta">
+            <span class="pill">Linux</span>
+            <span class="pill">CLI</span>
+            <span class="pill">Servers</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>Cloud &amp; Infrastructure Resources</h3>
+            <span class="status">Reference</span>
+          </div>
+          <p>
+            Mixed study material around cloud concepts, architecture, deployment, services, and the practical side of infrastructure and hosting.
+          </p>
+          <div class="book-meta">
+            <span class="pill">Cloud</span>
+            <span class="pill">Infrastructure</span>
+            <span class="pill">Architecture</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-top">
+            <h3>Cyber Security &amp; Best Practice Reading</h3>
+            <span class="status">Planned</span>
+          </div>
+          <p>
+            Resources focused on security fundamentals, system hardening, defensive thinking, and practical awareness that supports better infrastructure work.
+          </p>
+          <div class="book-meta">
+            <span class="pill">Security</span>
+            <span class="pill">Best Practice</span>
+            <span class="pill">Awareness</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="why-reading">
+    <div class="container content-width">
+      <div class="feature-box">
+        <h3>Why this page exists</h3>
+        <p>
+          A lot of what I’m doing is hands-on, but books and structured resources still help fill the gaps, especially when I want a clearer explanation of how something works rather than just following steps.
+        </p>
+        <p>
+          This page gives me a place to track the material that’s helped most, and later it can become a useful reference for anyone following a similar path into IT.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="notes">
+    <div class="container content-width">
+      <h2 class="section-title">Reading Notes</h2>
+      <p class="section-subtitle">
+        A simple area for takeaways, thoughts, and points I want to remember while working through books and study material.
+      </p>
+
+      <div class="notes-list">
+        <div class="note-item">
+          <h3>Concepts make more sense when tied to lab work</h3>
+          <p>
+            Reading helps most when I can connect it to something I’ve configured, broken, fixed, or tested myself. That tends to make the theory stick much better.
+          </p>
+        </div>
+
+        <div class="note-item">
+          <h3>Good references save time later</h3>
+          <p>
+            Even when I do not remember every detail, having solid reference material makes it easier to go back, verify something properly, and build better habits over time.
+          </p>
+        </div>
+
+        <div class="note-item">
+          <h3>Some topics need repeat exposure</h3>
+          <p>
+            Areas like subnetting, routing behaviour, Linux services, and cloud architecture often click better after reading them more than once and seeing them in different forms.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planned">
+    <div class="container content-width">
+      <h2 class="section-title">Planned Additions</h2>
+      <p class="section-subtitle">
+        This page will grow over time as I add more books, proper notes, and recommendations that have genuinely helped.
+      </p>
+
+      <div class="grid grid-2">
+        <article class="card">
+          <h3>Book-by-book notes</h3>
+          <p>
+            Short summaries, useful chapters, key lessons, and whether I’d recommend each book for beginners or more advanced readers.
+          </p>
+        </article>
+
+        <article class="card">
+          <h3>Study resources beyond books</h3>
+          <p>
+            Documentation, official guides, labs, and learning resources that pair well with reading and hands-on practice.
+          </p>
+        </article>
+      </div>
+
+      <a class="back-link" href="index.html">
+        <span>←</span>
+        <span>Back to homepage</span>
+      </a>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="container content-width">
+      <div class="tag-box">
+        <h2 class="section-title">Topics</h2>
+        <p class="section-subtitle" style="margin-bottom:14px;">
+          Areas I’m most interested in reading and learning more about.
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">Networking</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">Cloud</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Infrastructure</span>
+          <span class="tag">Virtualisation</span>
+          <span class="tag">Cyber Security</span>
+          <span class="tag">Documentation</span>
+          <span class="tag">Troubleshooting</span>
+          <span class="tag">Home Lab</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Sudonym | Chris Osborn
+    </div>
+  </footer>
+</body>
+</html>
