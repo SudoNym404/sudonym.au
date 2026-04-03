@@ -142,6 +142,10 @@
       margin-bottom: 20px;
     }
 
+    .hero-text {
+      min-width: 0;
+    }
+
     .intro-kicker {
       font-size: clamp(1.6rem, 2.1vw, 2.4rem);
       font-weight: 700;
@@ -287,6 +291,14 @@
       display: block;
       margin: 0 auto 14px;
       color: var(--accent);
+    }
+
+    .mobile-photo {
+      display: none;
+    }
+
+    .desktop-photo {
+      display: flex;
     }
 
     section {
@@ -439,7 +451,7 @@
       gap: 10px;
       margin-top: 8px;
     }
-    
+
     .tag {
       display: inline-flex;
       align-items: center;
@@ -460,27 +472,31 @@
 
     @media (max-width: 980px) {
       .intro-grid {
-        display: flex;
-        flex-direction: column;
+        grid-template-columns: 1fr;
         gap: 18px;
       }
 
-      .hero-intro-top {
-        order: 1;
+      .nav-inner {
+        gap: 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .desktop-photo {
+        display: none;
+      }
+
+      .mobile-photo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10px 0 12px;
+        padding: 0;
       }
 
       .hero-photo-wrap {
-        order: 2;
-        justify-content: center;
-        align-items: center;
         padding-left: 0;
         margin-left: 0 !important;
-        margin-top: 6px;
-        margin-bottom: 6px;
-      }
-
-      .hero-intro-copy {
-        order: 3;
       }
 
       .hero-photo {
@@ -489,16 +505,6 @@
 
       .content-width {
         max-width: 100%;
-      }
-    }
-
-
-      .intro-buttons {
-        order: 3;
-      }
-
-      .hero-tagline {
-        order: 4;
       }
     }
 
@@ -518,7 +524,7 @@
       }
 
       .hero-photo {
-        width: min(300px, 84vw);
+        width: min(220px, 72vw);
       }
 
       .intro-name {
@@ -564,6 +570,22 @@
             </p>
           </div>
 
+          <div class="hero-photo-wrap mobile-photo">
+            <div class="hero-photo">
+              <div class="hero-photo-inner">
+                <!-- Replace this block with your image later:
+                <img src="images/profile.jpg" alt="Chris Osborn">
+                -->
+                <div class="hero-photo-placeholder">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-3.87 0-7 2.24-7 5v1h14v-1c0-2.76-3.13-5-7-5z" fill="currentColor"/>
+                  </svg>
+                  Profile photo coming soon
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div class="hero-intro-copy">
             <p class="intro-copy">
               I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
@@ -590,12 +612,11 @@
               <a class="btn" href="#contact">Contact</a>
             </div>
 
-            <h2 class="hero-tagline">Learning, building and sharing along the way.                
-        </h2>
+            <h2 class="hero-tagline">Learning, building and sharing along the way.</h2>
           </div>
         </div>
 
-        <div class="hero-photo-wrap">
+        <div class="hero-photo-wrap desktop-photo">
           <div class="hero-photo">
             <div class="hero-photo-inner">
               <!-- Replace this block with your image later:
