@@ -1,1 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Sudonym | Home Lab | Chris Osborn</title>
+  <meta name="description" content="A look through the Sudonym home lab, including networking gear, virtualisation hosts, self-hosted services, and hands-on IT learning projects." />
+  <meta name="keywords" content="Sudonym, Chris Osborn, home lab, Proxmox, Unraid, Cisco, networking lab, self hosting, virtualisation" />
+  <meta name="author" content="Chris Osborn" />
+  <meta name="robots" content="index, follow" />
+
+  <meta property="og:title" content="Sudonym | Home Lab" />
+  <meta property="og:description" content="Networking gear, virtualisation hosts, self-hosted services, and practical hands-on learning through my home lab." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://sudonym.au/homelab.html" />
+  <meta property="og:site_name" content="Sudonym" />
+
+  <meta name="theme-color" content="#07102a" />
+
+  <style>
+    :root {
+      --bg: #07102a;
+      --bg-soft: #0b1638;
+      --card: rgba(255, 255, 255, 0.06);
+      --card-hover: rgba(255, 255, 255, 0.085);
+      --card-border: rgba(255, 160, 64, 0.18);
+      --text: #f3f6ff;
+      --muted: #b9c2de;
+      --accent: #ffa040;
+      --accent-soft: rgba(255, 160, 64, 0.12);
+      --shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+      --max-width: 1120px;
+      --content-width: 960px;
+      --radius: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(255, 160, 64, 0.08), transparent 24%),
+        radial-gradient(circle at top right, rgba(255, 160, 64, 0.06), transparent 18%),
+        linear-gradient(180deg, #050d24 0%, #07102a 42%, #07102a 100%);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(92%, var(--max-width));
+      margin: 0 auto;
+    }
+
+    .content-width {
+      max-width: var(--content-width);
+    }
+
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      backdrop-filter: blur(14px);
+      background: rgba(5, 10, 24, 0.72);
+      border-bottom: 1px solid rgba(255, 160, 64, 0.10);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 18px;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      white-space: nowrap;
+    }
+
+    .brand .sudo {
+      color: #ffffff;
+    }
+
+    .brand .nym {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.96rem;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--accent);
+    }
+
+    .hero {
+      padding: 78px 0 42px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(255, 160, 64, 0.10);
+      border: 1px solid rgba(255, 160, 64, 0.18);
+      color: #ffd7ae;
+      font-size: 0.9rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    .hero-title {
+      font-size: clamp(2.8rem, 5.8vw, 5rem);
+      line-height: 0.98;
+      margin: 0 0 16px;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      text-shadow: 0 0 14px rgba(255, 160, 64, 0.18);
+    }
+
+    .hero-title .accent {
+      color: var(--accent);
+    }
+
+    .hero-copy {
+      color: var(--muted);
+      font-size: 1.04rem;
+      max-width: 700px;
+      margin: 0 0 18px;
+    }
+
+    .intro-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 152px;
+      padding: 13px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      border: 1px solid rgba(255, 160, 64, 0.28);
+      transition: 0.2s ease;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 160, 64, 0.44);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .btn-primary {
+      background: rgba(255, 160, 64, 0.12);
+    }
+
+    .panel,
+    .card,
+    .highlight-card,
+    .contact-box,
+    .tag-box,
+    .spec-table-wrap {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-panel {
+      padding: 24px;
+      background:
+        linear-gradient(180deg, rgba(255, 160, 64, 0.08), rgba(255,255,255,0.03)),
+        rgba(255,255,255,0.04);
+      border: 1px solid rgba(255, 160, 64, 0.20);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .hero-panel h3 {
+      margin: 0 0 10px;
+      font-size: 1.08rem;
+      color: var(--accent);
+    }
+
+    .hero-panel p,
+    .hero-panel li {
+      color: var(--muted);
+      margin: 0;
+      font-size: 0.98rem;
+    }
+
+    .hero-panel ul {
+      margin: 0;
+      padding-left: 18px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      padding: 16px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+    }
+
+    .stat-number {
+      display: block;
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    section {
+      padding: 34px 0 52px;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin: 0 0 12px;
+    }
+
+    .section-subtitle {
+      color: var(--muted);
+      margin: 0 0 24px;
+      max-width: 780px;
+      font-size: 1.03rem;
+    }
+
+    .highlights-grid,
+    .cards-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .highlights-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .cards-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .highlight-card,
+    .card {
+      padding: 22px;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .highlight-card:hover,
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 160, 64, 0.32);
+      background: var(--card-hover);
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .card-icon {
+      width: 52px;
+      height: 52px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: rgba(255, 160, 64, 0.08);
+      border: 1px solid rgba(255, 160, 64, 0.22);
+      color: var(--accent);
+    }
+
+    .card h3,
+    .highlight-card h3 {
+      margin: 0;
+      font-size: 1.18rem;
+      color: #ffffff;
+    }
+
+    .card p,
+    .highlight-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.99rem;
+    }
+
+    .mini-label {
+      display: inline-block;
+      margin-bottom: 10px;
+      color: var(--accent);
+      font-size: 0.84rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .spec-table-wrap {
+      overflow-x: auto;
+      padding: 8px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 720px;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      vertical-align: top;
+    }
+
+    th {
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    td {
+      color: var(--muted);
+      font-size: 0.96rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .tag-box {
+      padding: 24px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 9px 13px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: #dce8ff;
+      font-size: 0.90rem;
+    }
+
+    .contact-box {
+      padding: 28px;
+      background: linear-gradient(180deg, rgba(255, 160, 64, 0.05), rgba(255, 255, 255, 0.04));
+      border: 1px solid rgba(255, 160, 64, 0.16);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .contact-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-width: 180px;
+      padding: 11px 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      color: var(--text);
+      font-size: 0.95rem;
+      transition: 0.2s ease;
+    }
+
+    .contact-links a:hover {
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 160, 64, 0.28);
+    }
+
+    footer {
+      padding: 36px 0 54px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+
+    @media (max-width: 980px) {
+      .nav-inner,
+      .hero-grid,
+      .highlights-grid,
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .hero-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .content-width {
+        max-width: 100%;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding-top: 54px;
+      }
+
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .intro-buttons,
+      .contact-links,
+      .hero-stats {
+        width: 100%;
+      }
+
+      .btn,
+      .contact-links a {
+        width: 100%;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <span class="sudo">Sudo</span><span class="nym">Nym</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a class="active" href="homelab.html">Home Lab</a>
+        <a href="#stack">Stack</a>
+        <a href="#gear">Gear</a>
+        <a href="#services">Services</a>
+        <a href="#next">Next</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container content-width">
+      <span class="eyebrow">Sudonym Home Lab</span>
+
+      <div class="hero-grid">
+        <div>
+          <h1 class="hero-title">
+            Building a practical <span class="accent">home lab</span><br>
+            for learning, testing and growth.
+          </h1>
+
+          <p class="hero-copy">
+            This is the hands-on side of my IT learning. It is where I test networking concepts, run virtual machines, work through services, and build a better understanding of how systems fit together.
+          </p>
+
+          <p class="hero-copy">
+            The lab is a mix of Cisco gear, Proxmox hosts, self-hosted services, and home infrastructure. Some of it is polished, some of it is still evolving, but all of it helps me learn by doing.
+          </p>
+
+          <div class="intro-buttons">
+            <a class="btn btn-primary" href="#stack">View lab stack</a>
+            <a class="btn" href="#gear">Current gear</a>
+            <a class="btn" href="index.html">Back to homepage</a>
+          </div>
+        </div>
+
+        <aside class="hero-panel panel">
+          <div>
+            <h3>What this lab is for</h3>
+            <ul>
+              <li>Practising routing, switching, VLANs, and general network troubleshooting</li>
+              <li>Running virtual machines and containers for testing services safely</li>
+              <li>Learning Linux, self-hosting, backups, and infrastructure planning</li>
+              <li>Building confidence through real setup work instead of only theory</li>
+            </ul>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <span class="stat-number">3</span>
+              <span class="stat-label">Proxmox micro hosts</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">1</span>
+              <span class="stat-label">Unraid media and storage box</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Cisco</span>
+              <span class="stat-label">Switching and routing lab gear</span>
+            </div>
+            <div class="stat">
+              <span class="stat-number">Ongoing</span>
+              <span class="stat-label">Always being improved and refined</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <section id="stack">
+    <div class="container content-width">
+      <h2 class="section-title">Lab Stack</h2>
+      <p class="section-subtitle">
+        The main parts of the lab and how they fit into my learning and home setup.
+      </p>
+
+      <div class="highlights-grid">
+        <div class="highlight-card">
+          <span class="mini-label">Virtualisation</span>
+          <h3>Proxmox cluster lab</h3>
+          <p>
+            My main virtual lab environment runs across Dell OptiPlex Micro systems. This gives me a place to test servers, Linux installs, networking setups, and service configurations without affecting the rest of the house.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="mini-label">Self Hosting</span>
+          <h3>Unraid for core services</h3>
+          <p>
+            I use Unraid for media, storage, and containers. It acts as the more practical home side of the setup while also giving me experience with Docker, app management, backups, and service troubleshooting.
+          </p>
+        </div>
+
+        <div class="highlight-card">
+          <span class="mini-label">Networking</span>
+          <h3>Cisco practice gear</h3>
+          <p>
+            Cisco routers and switches let me work on VLANs, routing, switching, STP, EtherChannel, ACLs, and general CCNA-style lab work using real gear as well as virtual environments.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="gear">
+    <div class="container content-width">
+      <h2 class="section-title">Current Gear</h2>
+      <p class="section-subtitle">
+        A snapshot of the hardware currently making up the lab. This can be updated over time as the setup changes.
+      </p>
+
+      <div class="spec-table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Area</th>
+              <th>What I’m using</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Virtualisation</strong></td>
+              <td>3 x Dell OptiPlex 7050 Micro PCs running Proxmox</td>
+              <td>VMs, testing environments, Linux practice, and infrastructure labs</td>
+            </tr>
+            <tr>
+              <td><strong>Self-hosting</strong></td>
+              <td>Unraid server for storage, containers, and media services</td>
+              <td>Home services, Docker apps, media, and centralised storage</td>
+            </tr>
+            <tr>
+              <td><strong>Routing &amp; switching</strong></td>
+              <td>Cisco routers and switches from my CCNA-style lab kit</td>
+              <td>Hands-on routing, switching, VLANs, ACLs, and protocol practice</td>
+            </tr>
+            <tr>
+              <td><strong>Rack &amp; layout</strong></td>
+              <td>Rack-mounted gear and flexible cable management setup</td>
+              <td>Organisation, easier changes, and a cleaner working space</td>
+            </tr>
+            <tr>
+              <td><strong>General endpoints</strong></td>
+              <td>Main PC, laptops, and household devices</td>
+              <td>Real-world clients for testing connectivity, storage, and services</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="services">
+    <div class="container content-width">
+      <h2 class="section-title">What runs in the lab</h2>
+      <p class="section-subtitle">
+        These are the areas I use the lab for most often, both for practical home use and for learning.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <rect x="4" y="4.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <rect x="4" y="14.5" width="16" height="5" rx="1.2" stroke="currentColor" stroke-width="1.8"/>
+                <circle cx="7.5" cy="7" r="1" fill="currentColor"/>
+                <circle cx="7.5" cy="17" r="1" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3>Virtual machines and test servers</h3>
+          </div>
+          <p>
+            I use the Proxmox side of the lab to spin up systems for Linux practice, network services, troubleshooting, and general experimentation without risking my day-to-day setup.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M7 18h9a4 4 0 0 0 0-8 5 5 0 0 0-9.6-1.4A3.5 3.5 0 0 0 7 18z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+                <path d="M12 11v5m0 0l-2-2m2 2l2-2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Containers and self-hosted apps</h3>
+          </div>
+          <p>
+            Unraid gives me a place to run Docker containers and manage services that are both useful at home and valuable for learning. It also helps me get more comfortable with storage layouts, backups, and app maintenance.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="1.8"/>
+                <path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.8 2.8M16.2 16.2L19 19M19 5l-2.8 2.8M7.8 16.2L5 19" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Networking labs</h3>
+          </div>
+          <p>
+            The network side is where I work on routing and switching fundamentals, device configuration, VLANs, trunking, ACLs, inter-VLAN routing, and troubleshooting behaviour between devices.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M5 6.5h14M5 12h14M5 17.5h9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Documentation and rebuild notes</h3>
+          </div>
+          <p>
+            A big part of the lab is documenting what I set up, what breaks, what I changed, and what I would do better next time. That helps turn isolated testing into useful learning I can revisit later.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="next">
+    <div class="container content-width">
+      <h2 class="section-title">What I’m working on next</h2>
+      <p class="section-subtitle">
+        The lab is still growing. These are the kinds of areas I plan to keep building out and documenting.
+      </p>
+
+      <div class="cards-grid">
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>Cleaner write-ups</h3>
+          </div>
+          <p>
+            Turning my notes, builds, and troubleshooting sessions into proper write-ups so the site becomes a clearer record of what I have done and learned.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M4 18l4.5-4.5 3 3L20 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M15 8h5v5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Better monitoring and visibility</h3>
+          </div>
+          <p>
+            Expanding into better monitoring, dashboards, alerts, and service visibility so the lab is not just running, but easier to understand and maintain.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M12 3l7 4v5c0 5-3.5 8-7 9-3.5-1-7-4-7-9V7l7-4z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Security-focused improvements</h3>
+          </div>
+          <p>
+            Hardening services, improving access control, and better separating different parts of the network so the environment reflects stronger real-world practice.
+          </p>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 19V9m6 10V5m6 14v-7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3>More structured lab design</h3>
+          </div>
+          <p>
+            Refining the physical and logical layout so it is easier to expand, easier to reset, and better suited to long-term study and portfolio-style documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="topics">
+    <div class="container content-width">
+      <div class="tag-box">
+        <h2 class="section-title">Lab Topics</h2>
+        <p class="section-subtitle" style="margin-bottom:14px;">
+          The main areas this page and lab will continue to cover.
+        </p>
+
+        <div class="tag-list">
+          <span class="tag">Proxmox</span>
+          <span class="tag">Unraid</span>
+          <span class="tag">Cisco</span>
+          <span class="tag">Routing</span>
+          <span class="tag">Switching</span>
+          <span class="tag">VLANs</span>
+          <span class="tag">Linux</span>
+          <span class="tag">Docker</span>
+          <span class="tag">Virtualisation</span>
+          <span class="tag">Self Hosting</span>
+          <span class="tag">Troubleshooting</span>
+          <span class="tag">Documentation</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="container content-width">
+      <div class="contact-box">
+        <h2 class="section-title">Keep exploring</h2>
+        <p class="section-subtitle" style="margin-bottom:0; max-width:680px;">
+          This page is designed to sit alongside the homepage and grow over time as I add more specific builds, diagrams, photos, and write-ups.
+        </p>
+
+        <div class="contact-links">
+          <a href="index.html">Back to homepage</a>
+          <a href="projects.html">Projects page</a>
+          <a href="https://github.com/SudoNym404" target="_blank" rel="noopener noreferrer">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      © 2026 Sudonym | Chris Osborn
+    </div>
+  </footer>
+</body>
+</html>
 
