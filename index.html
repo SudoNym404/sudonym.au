@@ -55,7 +55,7 @@
     }
 
     html {
-      scroll-behaviour: smooth;
+      scroll-behavior: smooth;
     }
 
     body {
@@ -245,36 +245,38 @@
       width: 220px;
       aspect-ratio: 1 / 1;
       border-radius: 50%;
-      padding: 4px;
-      background: rgba(255, 160, 64, 0.20);
+      padding: 10px;
+      background:
+        radial-gradient(circle at center, rgba(255, 160, 64, 0.14), rgba(255, 160, 64, 0.04) 60%, transparent 70%);
       box-shadow:
-        0 0 0 2px rgba(255, 160, 64, 0.55),
-        0 0 20px rgba(255, 160, 64, 0.40),
-        0 0 42px rgba(255, 160, 64, 0.24),
-        0 0 76px rgba(255, 160, 64, 0.12);
+        0 0 0 1px rgba(255, 160, 64, 0.22),
+        0 0 22px rgba(255, 160, 64, 0.16),
+        0 0 40px rgba(255, 160, 64, 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
     }
 
     .hero-photo-inner {
       width: 100%;
       height: 100%;
       border-radius: 50%;
-      overflow: hidden;
-      background: #10192f;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02)),
+        #10192f;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 0;
+      text-align: center;
+      padding: 26px;
+      overflow: hidden;
     }
 
     .hero-photo-inner img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center 20%;
       border-radius: 50%;
       display: block;
     }
@@ -488,25 +490,21 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        margin: 14px 0 18px;
+        margin: 10px 0 12px;
+        padding: 0;
       }
 
       .hero-photo-wrap {
         padding-left: 0;
         margin-left: 0 !important;
-        justify-content: center;
       }
 
       .hero-photo {
-        width: min(200px, 65vw);
+        width: min(240px, 70vw);
       }
 
       .content-width {
         max-width: 100%;
-      }
-
-      .hero-photo-inner img {
-        object-position: center 20%;
       }
     }
 
@@ -526,7 +524,7 @@
       }
 
       .hero-photo {
-        width: min(190px, 62vw);
+        width: min(220px, 72vw);
       }
 
       .intro-name {
@@ -536,6 +534,38 @@
       .hero-tagline {
         font-size: 2.2rem;
       }
+    }
+
+    /* About Me hero heading: stacked name, existing colour palette */
+    .about-label {
+      color: var(--accent);
+      font-size: 0.95rem;
+      letter-spacing: 3px;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    .intro-name span {
+      display: block;
+    }
+
+    .intro-name .intro-im {
+      color: #ffffff;
+      font-size: 0.55em;
+      margin-bottom: 10px;
+    }
+
+    .intro-name .first { color: var(--accent); }
+    .intro-name .last { color: #ffffff; }
+
+    .intro-role {
+      max-width: 540px;
+      line-height: 1.5;
+    }
+
+    @media (max-width: 640px) {
+      .intro-name { font-size: 2.8rem; }
+      .intro-name .intro-im { font-size: 0.6em; }
     }
   </style>
 </head>
@@ -561,32 +591,42 @@
       <div class="intro-grid">
         <div class="hero-text">
           <div class="hero-intro-top">
-            <p class="intro-kicker">I am</p>
+            <p class="intro-kicker about-label">ABOUT ME</p>
 
             <h1 class="intro-name">
-              <span class="first">CHRIS</span> <span class="last">OSBORN</span>
+              <span class="intro-im">I'm</span>
+              <span class="first">CHRIS</span>
+              <span class="last">OSBORN.</span>
             </h1>
 
             <p class="intro-role">
-              &amp; I’m <span class="highlight">moving into IT</span>
+              Technology enthusiast. Always learning, building and exploring.
             </p>
           </div>
 
           <div class="hero-photo-wrap mobile-photo">
             <div class="hero-photo">
               <div class="hero-photo-inner">
-                <img src="images/profile.png" alt="Chris Osborn">
+                <!-- Replace this block with your image later:
+                <img src="images/profile.jpg" alt="Chris Osborn">
+                -->
+                <div class="hero-photo-placeholder">
+                  <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-3.87 0-7 2.24-7 5v1h14v-1c0-2.76-3.13-5-7-5z" fill="currentColor"/>
+                  </svg>
+                  Profile photo coming soon
+                </div>
               </div>
             </div>
           </div>
 
           <div class="hero-intro-copy">
             <p class="intro-copy">
-              I’ve always had an interest in IT, but never fully pursued it until now. As I move towards finishing my current role, I’m taking the opportunity to transition into IT and build a long-term career.
+              I've always had an interest in technology, particularly understanding how things work, solving problems and building something useful. That curiosity has led me into networking, cloud infrastructure, virtualisation and self-hosting.
             </p>
 
             <p class="intro-copy">
-              This site is where I document what I’m learning, building, and figuring out along the way, with a focus on networking, cloud, home lab projects, and practical hands-on skills.
+              Sudonym is where I document what I'm learning, building and figuring out along the way. From home lab experiments to real-world troubleshooting, it's a place to share my progress, mistakes and discoveries.
             </p>
 
             <div class="tafe-box">
@@ -613,7 +653,15 @@
         <div class="hero-photo-wrap desktop-photo">
           <div class="hero-photo">
             <div class="hero-photo-inner">
-              <img src="images/profile.png" alt="Chris Osborn">
+              <!-- Replace this block with your image later:
+              <img src="images/profile.jpg" alt="Chris Osborn">
+              -->
+              <div class="hero-photo-placeholder">
+                <svg width="56" height="56" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M12 12c2.76 0 5-2.24 5-5S14.76 2 12 2 7 4.24 7 7s2.24 5 5 5zm0 2c-3.87 0-7 2.24-7 5v1h14v-1c0-2.76-3.13-5-7-5z" fill="currentColor"/>
+                </svg>
+                Profile photo coming soon
+              </div>
             </div>
           </div>
         </div>
